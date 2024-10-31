@@ -1,42 +1,21 @@
-import sys
-input = sys.stdin.readline
+# prime_list는 1부터 10000사이의 소수가 오름차순으로 저장된 리스트예요.
+from prime import prime_list
 
-n,m = map(int,input().split())
-bridges = []
-temp = []
-ans = [i+1 for i in range(n)]
-sum = 0
+# 합계가 짝수가 되는 두 소수를 찾는 함수예요.
+def goldbach(arr):
+    # 합계가 짝수가 되는 두 소수를 작은 수부터 차례로 리스트에 저장해 주세요.
+    num_list = []
 
-for _ in range(m):
-    u,v,w = map(int,input().split())
-    bridges.append([u,v,w])
-    sum += w
-print(bridges)
-print("ans는 이렇게입니다",ans)
-    
-temp.append(1)
-node = 1
-cnt = 0
-    
-while True:
-    mx,mnode = 0,0
-    for bridge in bridges:
-        print("let's go",bridge,temp)
-        if bridge[0] in temp and bridge[1] not in temp and mx < bridge[2]:
-            print("wow first case",bridge)
-            mx = bridge[2]
-            mnode = bridge[1]
-        elif bridge[0] not in temp and bridge[1] in temp and mx < bridge[2]:
-            print("wow second case", bridge)
-            mx = bridge[2]
-            mnode = bridge[0]
-    
-    if mnode != 0:
-        cnt += mx
-        node = mnode
-        temp.append(node)
-        print(temp)
-    
-    if len(temp) == n:
-        print(sum-cnt)
-        break
+    for number in arr:
+        for i in prime_list:
+            temp = number - i
+            if temp in prime_list:
+                num_list.append([i,temp])
+
+    return None
+
+
+arr = [int(x) for x in input().split()]
+
+for i in goldbach(arr):
+    print(i[0], i[1])
