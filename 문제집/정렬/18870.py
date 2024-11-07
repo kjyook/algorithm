@@ -25,10 +25,8 @@ def main():
 
     dot_list = list(map(int, sys.stdin.readline().split()))
     sorted_list = quick_sort(dot_list)
-    answer_list = []
-
-    for i in dot_list:
-        answer_list.append(str(sorted_list.index(i)))
+    value_to_index = {value : idx for idx, value in enumerate(sorted_list)}
+    answer_list = [str(value_to_index[i]) for i in dot_list]
 
     print(' '.join(answer_list))
 
