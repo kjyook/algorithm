@@ -7,7 +7,7 @@ def main():
     for i in range(len(word)):
         for j in range(len(word)-i):
             if word[i:j+i+1] not in answer:
-                answer.add(word[i:j+i+1])
+                answer.add(word[i:j+i+1])   
     
     print(len(answer))
     return
