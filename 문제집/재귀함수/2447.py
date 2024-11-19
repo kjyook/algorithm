@@ -7,7 +7,7 @@ def recursion(st):
         st[1][1] = " "
         return st
     
-    answer = [["" for _ in range(size)] for _ in range(size)]
+    answer = []
 
     for i in range(3):
         col = []
@@ -15,16 +15,10 @@ def recursion(st):
         for j in range(3):
             if i == 1 and j == 1:
                 row = [[" " for _ in range(size// 3)] for _ in range(len(st) // 3)]
-            elif i == 2 and j == 2:
-                row = recursion(st[size // 3 * i : size][size // 3 * j : size])
-            elif i == 2:
-                row = recursion(st[size // 3 * i : size][size // 3 * j : size // 3 * (j + 1)])
-            elif j == 2:
-                row = recursion(st[size // 3 * i : size // 3 * (i + 1)][size // 3 * j : size])
             else:
-                row = recursion(st[size // 3 * i : size // 3 * (i + 1)][size // 3 * j : size // 3 * (j + 1)])
-
-
+                row = recursion([[st[a][b] for b in range(size // 3 * j, size // 3 * (j + 1))] for a in range(size // 3 * i, size // 3 * (i + 1))])
+                #2d list slicing -> 불가능 그냥 for문 이용해서 하나씩 집어넣어주자...
+                
             if not col:
                 col = row
             else:
@@ -32,8 +26,6 @@ def recursion(st):
 
         for ls in col:
             answer.append(ls)
-
-    print("input", st, "output", answer)
 
     return answer
 
