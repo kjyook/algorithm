@@ -3,38 +3,41 @@ input = sys.stdin.readline
 
 n = int(input())
 s = [list(map(int, input().split())) for _ in range(n) ]
-people = []
-answer = set()
+everyone = set(i for i in range(n))
+people = set()
+other = set()
+min = sum(sum(row) for row in s)
 
 def calculator():
-    sum = 0
+    global min
+    sum_p, sum_o = 0, 0
+    other = everyone - people
 
     for i in people:
         for j in people:
-            sum += s[i][j]
+            sum_p += s[i][j]
+        
+    for i in other:
+        for j in other:
+            sum_o += s[i][j]
 
-    print(sum)
-    answer.add(sum)
+    if min > abs(sum_o - sum_p):
+        min = abs(sum_o - sum_p)
+
     return
 
 def backtracking(a):
     if len(people) == n / 2:
-        print(people)
         calculator()
         return
     
     for i in range(a, n):
-        people.append(i)
+        people.add(i)
         backtracking(i + 1)
-        people.pop()
+        people.remove(i)
 
     return
 
 backtracking(0)
 
-print(answer)
-while len(answer) != 2:
-    answer.remove(max(answer))
-    answer.remove(min(answer))
-
-print(max(answer) - min(answer))
+print(min)
