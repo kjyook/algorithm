@@ -22,13 +22,11 @@ def check(a, b):
         return 1
 
 for i in range(1, n + 1):
-    temp = 0
     for j in range(1, i):
         if i == j:
             continue
 
         if check(line[i], line[j]):
-            temp += 1
             dp[i][j] += 1
             dp[j][i] += 1
 
@@ -36,15 +34,16 @@ for i in range(1, n + 1):
     count[i] = sum(dp[i])
 
 while True:
+    if sum(count) == 0:
+        break
+
     idx = count.index(max(count))
     dp[idx] = [0] * (n + 1)
-    answer += 1
 
     for i in range(1, n + 1):
         dp[i][idx] = 0
         count[i] = sum(dp[i])
     
-    if sum(count) == 0:
-        break
+    answer += 1
 
 print(answer)
