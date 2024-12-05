@@ -1,2 +1,2 @@
-## gready algorithm
+## greedy algorithm
 말 그대로 욕심쟁이이다. 하나하나 진행할때 그 당시의 최선의 결과를 선택하면 된다. 끝!
