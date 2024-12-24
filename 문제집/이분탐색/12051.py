@@ -7,8 +7,6 @@ A = list(map(int, input().split()))
 dp = [A[0]]
 
 def findIndex(k):
-    global A, dp
-
     start, end = 0, len(dp) - 1
 
     while start <= end:
@@ -21,11 +19,13 @@ def findIndex(k):
         else:
             end = mid - 1
 
-        return start
+    return start
     
 for i in A:
     if dp[-1] < i:
         dp.append(i)
+    elif dp[-1] == i:
+        continue
     else:
         idx = findIndex(i)
         dp[idx] = i
